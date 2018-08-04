@@ -1,6 +1,6 @@
 package fr.lapostoj.rockpaperscissor.application.service
 
-import fr.lapostoj.rockpaperscissor.domain.model.game.GameNotFound
+import fr.lapostoj.rockpaperscissor.domain.model.game.GameNotFoundException
 import fr.lapostoj.rockpaperscissor.domain.model.game.GameRepository
 import fr.lapostoj.rockpaperscissor.factory.aGame
 import fr.lapostoj.rockpaperscissor.factory.aGameResponse
@@ -28,10 +28,10 @@ class GetGameTest: Spek({
                 assert(gameResponse == aGameResponse())
             }
 
-            it("should throw GameNotFound if no game is found for the passed id") {
+            it("should throw GameNotFoundException if no game is found for the passed id") {
                 every { gameRepository.findById(id = any()) } returns null
 
-                assertFailsWith(GameNotFound::class) {
+                assertFailsWith(GameNotFoundException::class) {
                     service.forId(gameId)
                 }
             }

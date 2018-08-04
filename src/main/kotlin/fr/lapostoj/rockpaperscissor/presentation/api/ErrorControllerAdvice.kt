@@ -1,5 +1,6 @@
 package fr.lapostoj.rockpaperscissor.presentation.api
 
+import fr.lapostoj.rockpaperscissor.domain.model.game.GameNotFoundException
 import org.slf4j.LoggerFactory
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
@@ -15,5 +16,12 @@ class ErrorControllerAdvice {
         log.error("Unexpected exception", e)
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
             .body("unexpected.error")
+    }
+
+    @ExceptionHandler(GameNotFoundException::class)
+    fun gameNotFoundException(e: GameNotFoundException): ResponseEntity<*> {
+        log.error("Unexpected exception", e)
+        return ResponseEntity.status(HttpStatus.NOT_FOUND)
+            .body("game.not.found")
     }
 }

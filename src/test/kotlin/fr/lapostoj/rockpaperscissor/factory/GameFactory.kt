@@ -38,9 +38,11 @@ fun aRound(
 )
 
 fun aGameResponse(
+    id: Long = 123,
     playerIds: List<Long> = listOf(50, 51),
     winningScore: Int = 5
 ) = GameResponse(
+    id = id,
     playerIds = playerIds,
     winningScore = winningScore
 )

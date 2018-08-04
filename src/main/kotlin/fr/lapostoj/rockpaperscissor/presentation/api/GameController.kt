@@ -27,7 +27,7 @@ class GameController {
 
     @GetMapping("/{gameId}")
     @ResponseStatus(HttpStatus.OK)
-    fun getGame(@PathVariable gameId: Long): GameResponse {
+    fun getGame(@PathVariable("gameId") gameId: Long): GameResponse {
         return getGame.forId(gameId)
     }
 }

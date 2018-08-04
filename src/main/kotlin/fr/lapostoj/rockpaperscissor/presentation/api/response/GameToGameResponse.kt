@@ -5,7 +5,7 @@ import fr.lapostoj.rockpaperscissor.domain.model.game.Game
 class GameToGameResponse {
     companion object {
         fun transform(game: Game): GameResponse {
-            return GameResponse(game.playerIds.map { it.value }, game.winningScore)
+            return GameResponse(game.id.value, game.playerIds.map { it.value }, game.winningScore)
         }
     }
 }

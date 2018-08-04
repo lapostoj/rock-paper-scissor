@@ -14,7 +14,7 @@ class CreateGame(private val gameRepository: GameRepository) {
 
     fun forCommand(createGameCommand: CreateGameCommand): GameResponse {
         log.info("Create game with command {}", createGameCommand)
-        val game = Game(GameId(123), createGameCommand.playerIds.map { PlayerId(it) }, createGameCommand.winningScore, mutableListOf())
+        val game = Game(gameRepository.nextId(), createGameCommand.playerIds.map { PlayerId(it) }, createGameCommand.winningScore, mutableListOf())
         val savedGame = gameRepository.save(game)
         return GameToGameResponse.transform(savedGame)
     }

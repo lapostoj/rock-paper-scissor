@@ -5,15 +5,19 @@ import fr.lapostoj.rockpaperscissor.domain.model.game.GameId
 import fr.lapostoj.rockpaperscissor.domain.model.game.GameRepository
 
 class GameRepositoryImpl: GameRepository {
+    private val inMemoryStorage: MutableMap<Long, Game> = hashMapOf()
+    private var idSequence = 1.toLong()
+
     override fun nextId(): GameId {
-        return GameId(Math.random().toLong())
+        return GameId(idSequence++)
     }
 
     override fun save(game: Game): Game {
+        inMemoryStorage[game.id.value] = game
         return game
     }
 
     override fun findById(id: GameId): Game? {
-        return null
+        return inMemoryStorage[id.value]
     }
 }

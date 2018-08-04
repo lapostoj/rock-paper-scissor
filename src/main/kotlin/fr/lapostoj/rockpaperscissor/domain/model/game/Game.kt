@@ -1,22 +1,29 @@
 package fr.lapostoj.rockpaperscissor.domain.model.game
 
-import fr.lapostoj.rockpaperscissor.domain.model.player.PlayerId
-
 class Game(
     val id: GameId,
     val playerIds: List<PlayerId>,
     val winningScore: Int,
-    val rounds: MutableList<Round>
+    var rounds: MutableList<Round>
 ) {
-    fun applyRound(round: Round) {
-        validateRoundCanBeApplied(round)
-        rounds.add(round)
+    fun playMove(move: Move) {
+        addNewRoundIfNeeded()
+
+        getLastRound().addMove(move)
     }
 
-    private fun validateRoundCanBeApplied(round: Round) {
-        if (round.moves.size != playerIds.size) {
-            throw RuntimeException("Incomplete round tried to be applied")
+    private fun addNewRoundIfNeeded() {
+        if (rounds.size == 0 || getLastRound().moves.size == playerIds.size) {
+            addNextRound()
         }
+    }
+
+    private fun getLastRound(): Round {
+        return rounds.last()
+    }
+
+    private fun addNextRound() {
+        rounds.add(Round(RoundId.nextId(), id, rounds.size + 1, mutableListOf()))
     }
 }
 

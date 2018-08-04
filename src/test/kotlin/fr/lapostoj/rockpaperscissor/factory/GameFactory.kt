@@ -1,17 +1,8 @@
 package fr.lapostoj.rockpaperscissor.factory
 
 import fr.lapostoj.rockpaperscissor.domain.model.game.*
-import fr.lapostoj.rockpaperscissor.domain.model.player.PlayerId
-import fr.lapostoj.rockpaperscissor.presentation.api.command.CreateGameCommand
-import fr.lapostoj.rockpaperscissor.presentation.api.response.GameResponse
-
-fun aCreateGameCommand(
-    playerIds: List<Long> = listOf(50, 51),
-    winningScore: Int = 5
-) = CreateGameCommand (
-    playerIds = playerIds,
-    winningScore = winningScore
-)
+import fr.lapostoj.rockpaperscissor.domain.model.game.PlayerId
+import java.util.*
 
 fun aGame(
     id: GameId = GameId(123),
@@ -25,11 +16,22 @@ fun aGame(
     rounds = rounds
 )
 
+fun aGameWithNoRound(
+    id: GameId = GameId(123),
+    playerIds: List<PlayerId> = listOf(PlayerId(50), PlayerId(51)),
+    winningScore: Int = 5
+) = Game(
+    id = id,
+    playerIds = playerIds,
+    winningScore = winningScore,
+    rounds = mutableListOf()
+)
+
 fun aRound(
-    id: RoundId = RoundId(234),
+    id: RoundId = RoundId(UUID.randomUUID()),
     gameId: GameId = GameId(123),
     roundNumber: Int = 1,
-    moves: List<Move> = listOf()
+    moves: MutableList<Move> = mutableListOf()
 ) = Round(
     id = id,
     gameId = gameId,
@@ -37,12 +39,12 @@ fun aRound(
     moves = moves
 )
 
-fun aGameResponse(
-    id: Long = 123,
-    playerIds: List<Long> = listOf(50, 51),
-    winningScore: Int = 5
-) = GameResponse(
+fun aMove(
+    id: MoveId = MoveId(456),
+    playerId: PlayerId = PlayerId(1),
+    value: MoveValue = MoveValue.ROCK
+) = Move(
     id = id,
-    playerIds = playerIds,
-    winningScore = winningScore
+    playerId = playerId,
+    value = value
 )

@@ -1,0 +1,58 @@
+package fr.lapostoj.rockpaperscissor.application.service
+
+import fr.lapostoj.rockpaperscissor.domain.model.game.*
+import fr.lapostoj.rockpaperscissor.factory.*
+import fr.lapostoj.rockpaperscissor.presentation.api.response.MoveResponse
+import io.mockk.every
+import io.mockk.mockk
+import io.mockk.verify
+import org.jetbrains.spek.api.Spek
+import org.jetbrains.spek.api.dsl.describe
+import org.jetbrains.spek.api.dsl.it
+import org.jetbrains.spek.api.dsl.on
+import kotlin.test.assertEquals
+import kotlin.test.assertFailsWith
+
+class PlayMoveTest: Spek({
+    describe("a play move service") {
+        val gameRepository = mockk<GameRepository>()
+        val moveRepository = mockk<MoveRepository>()
+        every { moveRepository.nextId() } returns MoveId(456)
+        every { gameRepository.findById(id = any()) } returns aGame()
+        every { gameRepository.save(game = any()) } returns aGame()
+        val service = PlayMove(gameRepository, moveRepository)
+
+        val gameId: Long = 123
+        val playMoveCommand = aPlayMoveCommand()
+
+        on("forCommand with valid gameId") {
+            val moveResponse: MoveResponse = service.forCommand(gameId, playMoveCommand)
+
+            it("should get the game of the passed id") {
+                verify { gameRepository.findById(id = any()) }
+            }
+
+            it("should get an id for the move") {
+                verify { moveRepository.nextId() }
+            }
+
+            it("should persist the game") {
+                verify { gameRepository.save(game = any()) }
+            }
+
+            it("should return the create game as a response for the passed command") {
+                assertEquals(moveResponse, aMoveResponse())
+            }
+        }
+
+        on("forCommand with unknown gameId") {
+            it("should throw a GameNotFoundException if no game is found for the passed id") {
+                every { gameRepository.findById(id = any()) } returns null
+
+                assertFailsWith(GameNotFoundException::class) {
+                    service.forCommand(gameId, playMoveCommand)
+                }
+            }
+        }
+    }
+})

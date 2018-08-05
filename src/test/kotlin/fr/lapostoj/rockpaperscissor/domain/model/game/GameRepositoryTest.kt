@@ -1,6 +1,7 @@
 package fr.lapostoj.rockpaperscissor.domain.model.game
 
 import fr.lapostoj.rockpaperscissor.factory.aGame
+import fr.lapostoj.rockpaperscissor.factory.aMove
 import fr.lapostoj.rockpaperscissor.infrastructure.persistence.InMemoryGameRepository
 import org.jetbrains.spek.api.Spek
 import org.jetbrains.spek.api.dsl.context
@@ -17,7 +18,7 @@ class GameRepositoryTest: Spek({
                 gameRepository = InMemoryGameRepository()
             }
 
-            it("should return the incremented") {
+            it("should return the incremented id") {
                 assertEquals(gameRepository.nextId(), GameId(1))
                 assertEquals(gameRepository.nextId(), GameId(2))
                 assertEquals(gameRepository.nextId(), GameId(3))
@@ -25,31 +26,45 @@ class GameRepositoryTest: Spek({
         }
 
         context("save") {
+            val game = aGame()
+
             beforeEachTest {
                 gameRepository = InMemoryGameRepository()
             }
 
-            val game = aGame()
-            val persistedGame = gameRepository.save(game)
-
             it("should return the saved game") {
+                val persistedGame = gameRepository.save(game)
+
                 assertEquals(persistedGame, game)
             }
 
             it("should have persisted the passed game") {
+                gameRepository.save(game)
                 val retrievedGame = gameRepository.findById(game.id)
 
                 assertEquals(retrievedGame, game)
             }
+
+            it("should update the game if saving an existing one") {
+                val move = aMove()
+                val persistedGame = gameRepository.save(game)
+                persistedGame.playMove(move)
+
+                gameRepository.save(persistedGame)
+                val retrievedGame = gameRepository.findById(game.id) ?: throw GameNotFoundException("Broken test")
+
+                assertEquals(retrievedGame.rounds[0].moves.size, 1)
+                assertEquals(retrievedGame.rounds[0].moves[0], move)
+            }
         }
 
         context("findById") {
+            val game = aGame()
+
             beforeEachTest {
                 gameRepository = InMemoryGameRepository()
+                gameRepository.save(game)
             }
-
-            val game = aGame()
-            gameRepository.save(game)
 
             it("should return the game of the passed id if it exists") {
                 val retrievedGame = gameRepository.findById(game.id)

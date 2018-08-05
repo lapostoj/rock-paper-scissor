@@ -3,17 +3,20 @@ package fr.lapostoj.rockpaperscissor.domain.model.game
 import fr.lapostoj.rockpaperscissor.factory.aGame
 import fr.lapostoj.rockpaperscissor.infrastructure.persistence.InMemoryGameRepository
 import org.jetbrains.spek.api.Spek
-import org.jetbrains.spek.api.dsl.describe
+import org.jetbrains.spek.api.dsl.context
+import org.jetbrains.spek.api.dsl.given
 import org.jetbrains.spek.api.dsl.it
-import org.jetbrains.spek.api.dsl.on
-import kotlin.test.assert
 import kotlin.test.assertEquals
 
 class GameRepositoryTest: Spek({
-    describe("a game repository") {
-        val gameRepository = InMemoryGameRepository()
+    given("a game repository") {
+        var gameRepository = InMemoryGameRepository()
 
-        on("nextId") {
+        context("nextId") {
+            beforeEachTest {
+                gameRepository = InMemoryGameRepository()
+            }
+
             it("should return the incremented") {
                 assertEquals(gameRepository.nextId(), GameId(1))
                 assertEquals(gameRepository.nextId(), GameId(2))
@@ -21,7 +24,11 @@ class GameRepositoryTest: Spek({
             }
         }
 
-        on("save") {
+        context("save") {
+            beforeEachTest {
+                gameRepository = InMemoryGameRepository()
+            }
+
             val game = aGame()
             val persistedGame = gameRepository.save(game)
 
@@ -36,7 +43,11 @@ class GameRepositoryTest: Spek({
             }
         }
 
-        on("findById") {
+        context("findById") {
+            beforeEachTest {
+                gameRepository = InMemoryGameRepository()
+            }
+
             val game = aGame()
             gameRepository.save(game)
 
@@ -46,7 +57,7 @@ class GameRepositoryTest: Spek({
                 assertEquals(retrievedGame, game)
             }
 
-            it("should return null if not game exists for the passed id") {
+            it("should return null if no game exists for the passed id") {
                 val retrievedGame = gameRepository.findById(GameId(999))
 
                 assertEquals(retrievedGame, null)

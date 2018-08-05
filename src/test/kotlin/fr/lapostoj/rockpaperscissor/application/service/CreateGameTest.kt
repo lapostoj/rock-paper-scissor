@@ -10,19 +10,19 @@ import io.mockk.every
 import io.mockk.mockk
 import io.mockk.verify
 import org.jetbrains.spek.api.Spek
-import org.jetbrains.spek.api.dsl.describe
+import org.jetbrains.spek.api.dsl.context
+import org.jetbrains.spek.api.dsl.given
 import org.jetbrains.spek.api.dsl.it
-import org.jetbrains.spek.api.dsl.on
 import kotlin.test.assertEquals
 
 class CreateGameTest: Spek({
-    describe("a create game service") {
+    given("a create game service") {
         val gameRepository = mockk<GameRepository>()
         every { gameRepository.nextId() } returns GameId(123)
         every { gameRepository.save(game = any()) } returns aGame()
         val service = CreateGame(gameRepository)
 
-        on("forCommand") {
+        context("forCommand") {
             val gameResponse: GameResponse = service.forCommand(aCreateGameCommand())
 
             it("should persist the created game") {

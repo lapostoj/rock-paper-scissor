@@ -4,7 +4,9 @@ import fr.lapostoj.rockpaperscissor.factory.aGame
 import fr.lapostoj.rockpaperscissor.factory.aGameWithNoRound
 import fr.lapostoj.rockpaperscissor.factory.aMove
 import org.jetbrains.spek.api.Spek
-import org.jetbrains.spek.api.dsl.*
+import org.jetbrains.spek.api.dsl.context
+import org.jetbrains.spek.api.dsl.given
+import org.jetbrains.spek.api.dsl.it
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
 

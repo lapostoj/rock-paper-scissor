@@ -1,7 +1,6 @@
 package fr.lapostoj.rockpaperscissor.factory
 
 import fr.lapostoj.rockpaperscissor.domain.model.game.*
-import fr.lapostoj.rockpaperscissor.domain.model.game.PlayerId
 import java.util.*
 
 fun aGame(

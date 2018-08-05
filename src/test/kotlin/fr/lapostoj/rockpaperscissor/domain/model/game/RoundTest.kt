@@ -3,7 +3,9 @@ package fr.lapostoj.rockpaperscissor.domain.model.game
 import fr.lapostoj.rockpaperscissor.factory.aMove
 import fr.lapostoj.rockpaperscissor.factory.aRound
 import org.jetbrains.spek.api.Spek
-import org.jetbrains.spek.api.dsl.*
+import org.jetbrains.spek.api.dsl.context
+import org.jetbrains.spek.api.dsl.given
+import org.jetbrains.spek.api.dsl.it
 import kotlin.test.*
 
 class RoundTest: Spek({

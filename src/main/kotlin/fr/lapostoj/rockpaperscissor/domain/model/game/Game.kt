@@ -7,9 +7,26 @@ class Game(
     var rounds: MutableList<Round>
 ) {
     fun playMove(move: Move) {
+        validateGameIsNotFinished()
         addNewRoundIfNeeded()
 
         getLastRound().addMove(move)
+    }
+
+    private fun validateGameIsNotFinished() {
+        playerIds.forEach{
+            playerId -> (
+                if (winningScore == getScore(playerId)) {
+                    throw GameFinishedException("Player $playerId already won the game")
+                }
+            )
+        }
+    }
+
+    private fun getScore(playerId: PlayerId): Int {
+        return rounds.filter{
+            round -> playerId == round.getWinner()
+        }.size
     }
 
     private fun addNewRoundIfNeeded() {

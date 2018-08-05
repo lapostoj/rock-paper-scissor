@@ -11,6 +11,19 @@ class Round(
         moves.add(move)
     }
 
+    fun getWinner(): PlayerId? {
+        if (moves.size < 2){
+            return null
+        }
+        if (moves[0].compare(moves[1]) > 0) {
+            return moves[0].playerId
+        } else if (moves[0].compare(moves[1]) < 0) {
+            return moves[1].playerId
+        } else {
+            return null
+        }
+    }
+
     private fun validateMoveCanBeAdded(move: Move) {
         if (moves.map(Move::playerId).contains(move.playerId)) {
             throw InvalidMoveException("Player ${move.playerId.value} already played in this round")

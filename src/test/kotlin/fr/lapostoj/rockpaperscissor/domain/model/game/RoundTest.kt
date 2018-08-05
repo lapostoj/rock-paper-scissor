@@ -4,8 +4,7 @@ import fr.lapostoj.rockpaperscissor.factory.aMove
 import fr.lapostoj.rockpaperscissor.factory.aRound
 import org.jetbrains.spek.api.Spek
 import org.jetbrains.spek.api.dsl.*
-import kotlin.test.assertFailsWith
-import kotlin.test.assertTrue
+import kotlin.test.*
 
 class RoundTest: Spek({
     given("a round") {
@@ -30,6 +29,51 @@ class RoundTest: Spek({
                 assertFailsWith(InvalidMoveException::class) {
                     round.addMove(move)
                 }
+            }
+        }
+
+        context("getWinner") {
+            val winnerId = PlayerId(2)
+
+            beforeEachTest {
+                round = aRound()
+            }
+
+            it("should return the id of the winner of the round") {
+                val rockMove = aMove()
+                val paperMove = aMove(winnerId, MoveValue.PAPER)
+                round.addMove(rockMove)
+                round.addMove(paperMove)
+
+                val id = round.getWinner()
+
+                assertNotNull(id)
+                assertEquals(id, winnerId)
+            }
+
+            it("should return null if all players played the same move") {
+                val rockMove1 = aMove()
+                val rockMove2 = aMove(winnerId, MoveValue.ROCK)
+                round.addMove(rockMove1)
+                round.addMove(rockMove2)
+
+                val id = round.getWinner()
+
+                assertNull(id)
+            }
+
+            it("should return null if the round is empty") {
+                val id = round.getWinner()
+
+                assertNull(id)
+            }
+
+            it("should return null if the round is incomplete") {
+                round.addMove(aMove())
+
+                val id = round.getWinner()
+
+                assertNull(id)
             }
         }
     }

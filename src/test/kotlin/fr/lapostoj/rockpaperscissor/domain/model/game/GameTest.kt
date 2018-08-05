@@ -6,6 +6,7 @@ import fr.lapostoj.rockpaperscissor.factory.aMove
 import org.jetbrains.spek.api.Spek
 import org.jetbrains.spek.api.dsl.*
 import kotlin.test.assertEquals
+import kotlin.test.assertFailsWith
 
 class GameTest: Spek({
     given("a game with no round") {
@@ -61,6 +62,24 @@ class GameTest: Spek({
                 assertEquals(game.rounds[0].moves[1], move2)
                 assertEquals(game.rounds[1].moves.size, 1)
                 assertEquals(game.rounds[1].moves[0], move3)
+            }
+        }
+    }
+
+    given("an already finished game") {
+        val game = aGame(GameId(123), listOf(PlayerId(1), PlayerId(2)), 1)
+        val move1 = aMove(game.playerIds[0], MoveValue.ROCK)
+        val move2 = aMove(game.playerIds[1], MoveValue.PAPER)
+        game.playMove(move1)
+        game.playMove(move2)
+
+        context("playMove") {
+            val move3 = aMove(game.playerIds[0], MoveValue.ROCK)
+
+            it("should throw GameFinishedException") {
+                assertFailsWith(GameFinishedException::class) {
+                    game.playMove(move3)
+                }
             }
         }
     }

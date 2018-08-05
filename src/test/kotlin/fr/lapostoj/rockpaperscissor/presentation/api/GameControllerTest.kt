@@ -4,7 +4,9 @@ import com.fasterxml.jackson.databind.ObjectMapper
 import fr.lapostoj.rockpaperscissor.application.service.CreateGame
 import fr.lapostoj.rockpaperscissor.application.service.GetGame
 import fr.lapostoj.rockpaperscissor.application.service.PlayMove
+import fr.lapostoj.rockpaperscissor.domain.model.game.GameFinishedException
 import fr.lapostoj.rockpaperscissor.domain.model.game.GameNotFoundException
+import fr.lapostoj.rockpaperscissor.domain.model.game.InvalidMoveException
 import fr.lapostoj.rockpaperscissor.factory.aCreateGameCommand
 import fr.lapostoj.rockpaperscissor.factory.aGameResponse
 import fr.lapostoj.rockpaperscissor.factory.aMoveResponse
@@ -128,6 +130,42 @@ class GameControllerTest: Spek({
             response.andExpect(status().isNotFound)
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
                 .andExpect(jsonPath("$").value("game.not.found"))
+        }
+
+        it("POST move should return 422 if the move is invalid") {
+            every { playMove.forCommand(gameId = any(), playMoveCommand = any()) } throws InvalidMoveException("Invalid move")
+            val gameId = 123
+            val playMoveCommand = aPlayMoveCommand()
+
+            val response = mvc.perform(
+                post("/v1/games/$gameId/moves")
+                    .content(objectMapper.writeValueAsString(playMoveCommand))
+                    .contentType(MediaType.APPLICATION_JSON_UTF8)
+                    .accept(MediaType.APPLICATION_JSON_UTF8)
+            )
+
+            verify { playMove.forCommand(gameId = any(), playMoveCommand = any()) }
+            response.andExpect(status().isUnprocessableEntity)
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+                .andExpect(jsonPath("$").value("invalid.move"))
+        }
+
+        it("POST move should return 422 if the game is finished") {
+            every { playMove.forCommand(gameId = any(), playMoveCommand = any()) } throws GameFinishedException("Game finished")
+            val gameId = 123
+            val playMoveCommand = aPlayMoveCommand()
+
+            val response = mvc.perform(
+                post("/v1/games/$gameId/moves")
+                    .content(objectMapper.writeValueAsString(playMoveCommand))
+                    .contentType(MediaType.APPLICATION_JSON_UTF8)
+                    .accept(MediaType.APPLICATION_JSON_UTF8)
+            )
+
+            verify { playMove.forCommand(gameId = any(), playMoveCommand = any()) }
+            response.andExpect(status().isUnprocessableEntity)
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+                .andExpect(jsonPath("$").value("game.finished"))
         }
     }
 })

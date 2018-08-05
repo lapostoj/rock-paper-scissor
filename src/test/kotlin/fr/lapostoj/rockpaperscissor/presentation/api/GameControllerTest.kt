@@ -108,7 +108,6 @@ class GameControllerTest: Spek({
             verify { playMove.forCommand(gameId = any(), playMoveCommand = any()) }
             response.andExpect(status().isCreated)
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
-                .andExpect(jsonPath("$.id").value(456))
                 .andExpect(jsonPath("$.playerId").value(playMoveCommand.playerId))
                 .andExpect(jsonPath("$.moveValue").value(playMoveCommand.moveValue.name))
         }

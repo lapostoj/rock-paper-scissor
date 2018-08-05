@@ -8,8 +8,7 @@ import fr.lapostoj.rockpaperscissor.presentation.api.response.MoveToMoveResponse
 import org.slf4j.LoggerFactory
 
 class PlayMove(
-    private val gameRepository: GameRepository,
-    private val moveRepository: MoveRepository
+    private val gameRepository: GameRepository
 ) {
     private val log = LoggerFactory.getLogger(PlayMove::class.java)
 
@@ -20,7 +19,6 @@ class PlayMove(
             ?: throw GameNotFoundException("Game of id $gameId not found")
 
         val move = Move(
-            moveRepository.nextId(),
             PlayerId(playMoveCommand.playerId),
             MoveValue.valueOf(playMoveCommand.moveValue.name)
         )

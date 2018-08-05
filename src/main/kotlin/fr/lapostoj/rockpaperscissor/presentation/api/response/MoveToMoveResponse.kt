@@ -6,7 +6,7 @@ import fr.lapostoj.rockpaperscissor.presentation.api.command.MoveValue
 class MoveToMoveResponse {
     companion object {
         fun transform(move: Move): MoveResponse {
-            return MoveResponse(move.id.value, move.playerId.value, MoveValue.valueOf(move.value.name))
+            return MoveResponse(move.playerId.value, MoveValue.valueOf(move.value.name))
         }
     }
 }

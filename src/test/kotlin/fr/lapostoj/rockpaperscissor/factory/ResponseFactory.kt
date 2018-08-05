@@ -15,11 +15,9 @@ fun aGameResponse(
 )
 
 fun aMoveResponse(
-    id: Long = 456,
     playerId: Long = 1,
     moveValue: MoveValue = MoveValue.ROCK
 ) = MoveResponse(
-    id = id,
     playerId = playerId,
     moveValue = moveValue
 )

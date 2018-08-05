@@ -12,7 +12,6 @@ class MoveToMoveResponseTest: Spek({
         it("should convert correctly to move response") {
             val moveResponse = MoveToMoveResponse.transform(move)
 
-            assertEquals(moveResponse.id, move.id.value)
             assertEquals(moveResponse.playerId, move.playerId.value)
             assertEquals(moveResponse.moveValue.name, move.value.name)
         }

@@ -40,11 +40,9 @@ fun aRound(
 )
 
 fun aMove(
-    id: MoveId = MoveId(456),
     playerId: PlayerId = PlayerId(1),
     value: MoveValue = MoveValue.ROCK
 ) = Move(
-    id = id,
     playerId = playerId,
     value = value
 )

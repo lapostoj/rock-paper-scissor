@@ -23,11 +23,11 @@ class GameTest: Spek({
 
     given("a game with an incomplete round") {
         val game = aGame()
-        val move1 = aMove(MoveId(456), game.playerIds[0], MoveValue.ROCK)
+        val move1 = aMove(game.playerIds[0], MoveValue.ROCK)
         game.playMove(move1)
 
         context("playMove") {
-            val move2 = aMove(MoveId(456), game.playerIds[1], MoveValue.ROCK)
+            val move2 = aMove(game.playerIds[1], MoveValue.ROCK)
             game.playMove(move2)
 
             it("should add the move to the last round") {
@@ -41,13 +41,13 @@ class GameTest: Spek({
 
     given("a game with a complete round") {
         val game = aGame()
-        val move1 = aMove(MoveId(456), game.playerIds[0], MoveValue.ROCK)
-        val move2 = aMove(MoveId(457), game.playerIds[1], MoveValue.ROCK)
+        val move1 = aMove(game.playerIds[0], MoveValue.ROCK)
+        val move2 = aMove(game.playerIds[1], MoveValue.ROCK)
         game.playMove(move1)
         game.playMove(move2)
 
         context("playMove") {
-            val move3 = aMove(MoveId(458), game.playerIds[0], MoveValue.ROCK)
+            val move3 = aMove(game.playerIds[0], MoveValue.ROCK)
             game.playMove(move3)
 
             it("should add a round") {

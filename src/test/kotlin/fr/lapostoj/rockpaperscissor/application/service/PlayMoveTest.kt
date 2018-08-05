@@ -16,11 +16,9 @@ import kotlin.test.assertFailsWith
 class PlayMoveTest: Spek({
     describe("a play move service") {
         val gameRepository = mockk<GameRepository>()
-        val moveRepository = mockk<MoveRepository>()
-        every { moveRepository.nextId() } returns MoveId(456)
         every { gameRepository.findById(id = any()) } returns aGame()
         every { gameRepository.save(game = any()) } returns aGame()
-        val service = PlayMove(gameRepository, moveRepository)
+        val service = PlayMove(gameRepository)
 
         val gameId: Long = 123
         val playMoveCommand = aPlayMoveCommand()
@@ -30,10 +28,6 @@ class PlayMoveTest: Spek({
 
             it("should get the game of the passed id") {
                 verify { gameRepository.findById(id = any()) }
-            }
-
-            it("should get an id for the move") {
-                verify { moveRepository.nextId() }
             }
 
             it("should persist the game") {

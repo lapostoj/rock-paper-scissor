@@ -4,7 +4,6 @@ import fr.lapostoj.rockpaperscissor.application.service.CreateGame
 import fr.lapostoj.rockpaperscissor.application.service.GetGame
 import fr.lapostoj.rockpaperscissor.application.service.PlayMove
 import fr.lapostoj.rockpaperscissor.domain.model.game.GameRepository
-import fr.lapostoj.rockpaperscissor.domain.model.game.MoveRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
@@ -15,9 +14,6 @@ import org.springframework.context.annotation.Import
 class ServicesConfiguration {
     @Autowired
     lateinit var gameRepository: GameRepository
-
-    @Autowired
-    lateinit var moveRepository: MoveRepository
 
     @Bean
     fun createGame(): CreateGame {
@@ -31,6 +27,6 @@ class ServicesConfiguration {
 
     @Bean
     fun playMove(): PlayMove {
-        return PlayMove(gameRepository, moveRepository)
+        return PlayMove(gameRepository)
     }
 }

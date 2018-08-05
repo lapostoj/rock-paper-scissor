@@ -15,9 +15,9 @@ class Round(
         if (moves.size < 2){
             return null
         }
-        if (moves[0].compare(moves[1]) > 0) {
+        if (moves[0] > moves[1]) {
             return moves[0].playerId
-        } else if (moves[0].compare(moves[1]) < 0) {
+        } else if (moves[0] < moves[1]) {
             return moves[1].playerId
         } else {
             return null

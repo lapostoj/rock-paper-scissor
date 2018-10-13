@@ -5,39 +5,39 @@ import fr.lapostoj.rockpaperscissor.domain.model.game.GameNotFoundException
 import fr.lapostoj.rockpaperscissor.domain.model.game.InvalidMoveException
 import org.slf4j.LoggerFactory
 import org.springframework.http.HttpStatus
-import org.springframework.http.ResponseEntity
-import org.springframework.web.bind.annotation.ControllerAdvice
 import org.springframework.web.bind.annotation.ExceptionHandler
+import org.springframework.web.bind.annotation.ResponseStatus
+import org.springframework.web.bind.annotation.RestControllerAdvice
 
-@ControllerAdvice
+@RestControllerAdvice
 class ErrorControllerAdvice {
     private val log = LoggerFactory.getLogger(GameController::class.java)
 
     @ExceptionHandler(RuntimeException::class)
-    fun unexpectedRuntimeException(e: RuntimeException): ResponseEntity<*> {
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    fun unexpectedRuntimeException(e: RuntimeException): String {
         log.error("Unexpected exception", e)
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-            .body("unexpected.error")
+        return "unexpected.error"
     }
 
     @ExceptionHandler(GameNotFoundException::class)
-    fun gameNotFoundException(e: GameNotFoundException): ResponseEntity<*> {
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    fun gameNotFoundException(e: GameNotFoundException): String {
         log.error("Game Not Found exception", e)
-        return ResponseEntity.status(HttpStatus.NOT_FOUND)
-            .body("game.not.found")
+        return "game.not.found"
     }
 
     @ExceptionHandler(GameFinishedException::class)
-    fun gameFinishedException(e: GameFinishedException): ResponseEntity<*> {
+    @ResponseStatus(HttpStatus.UNPROCESSABLE_ENTITY)
+    fun gameFinishedException(e: GameFinishedException): String {
         log.error("Game Finished exception", e)
-        return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY)
-            .body("game.finished")
+        return "game.finished"
     }
 
     @ExceptionHandler(InvalidMoveException::class)
-    fun invalidMoveException(e: InvalidMoveException): ResponseEntity<*> {
+    @ResponseStatus(HttpStatus.UNPROCESSABLE_ENTITY)
+    fun invalidMoveException(e: InvalidMoveException): String {
         log.error("Invalid Move exception", e)
-        return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY)
-            .body("invalid.move")
+        return "invalid.move"
     }
 }

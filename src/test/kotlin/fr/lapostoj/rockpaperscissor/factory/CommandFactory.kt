@@ -4,7 +4,6 @@ import fr.lapostoj.rockpaperscissor.presentation.api.command.CreateGameCommand
 import fr.lapostoj.rockpaperscissor.presentation.api.command.MoveValue
 import fr.lapostoj.rockpaperscissor.presentation.api.command.PlayMoveCommand
 
-
 fun aCreateGameCommand(
     playerIds: List<Long> = listOf(50, 51),
     winningScore: Int = 5

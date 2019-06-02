@@ -2,14 +2,12 @@ package fr.lapostoj.rockpaperscissor.domain.model.game
 
 import fr.lapostoj.rockpaperscissor.factory.aMove
 import fr.lapostoj.rockpaperscissor.factory.aRound
-import org.jetbrains.spek.api.Spek
-import org.jetbrains.spek.api.dsl.context
-import org.jetbrains.spek.api.dsl.given
-import org.jetbrains.spek.api.dsl.it
+import org.spekframework.spek2.Spek
+import org.spekframework.spek2.style.specification.describe
 import kotlin.test.*
 
 class RoundTest: Spek({
-    given("a round") {
+    describe("a round") {
         var round = aRound()
 
         context("addMove") {

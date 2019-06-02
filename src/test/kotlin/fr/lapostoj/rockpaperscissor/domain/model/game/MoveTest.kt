@@ -1,14 +1,13 @@
 package fr.lapostoj.rockpaperscissor.domain.model.game
 
 import fr.lapostoj.rockpaperscissor.factory.aMove
-import org.jetbrains.spek.api.Spek
-import org.jetbrains.spek.api.dsl.given
-import org.jetbrains.spek.api.dsl.it
+import org.spekframework.spek2.Spek
+import org.spekframework.spek2.style.specification.describe
 import kotlin.test.assertEquals
 import kotlin.test.assertTrue
 
 class MoveTest: Spek({
-    given("a rock move") {
+    describe("a rock move") {
         val move = aMove()
 
         it("should compare correctly with a rock move") {
@@ -24,7 +23,7 @@ class MoveTest: Spek({
         }
     }
 
-    given("a paper move") {
+    describe("a paper move") {
         val move = aMove(PlayerId(1), MoveValue.PAPER)
 
         it("should compare correctly with a rock move") {
@@ -40,7 +39,7 @@ class MoveTest: Spek({
         }
     }
 
-    given("a scissor move") {
+    describe("a scissor move") {
         val move = aMove(PlayerId(1), MoveValue.SCISSOR)
 
         it("should compare correctly with a rock move") {

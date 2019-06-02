@@ -3,14 +3,12 @@ package fr.lapostoj.rockpaperscissor.domain.model.game
 import fr.lapostoj.rockpaperscissor.factory.aGame
 import fr.lapostoj.rockpaperscissor.factory.aMove
 import fr.lapostoj.rockpaperscissor.infrastructure.persistence.InMemoryGameRepository
-import org.jetbrains.spek.api.Spek
-import org.jetbrains.spek.api.dsl.context
-import org.jetbrains.spek.api.dsl.given
-import org.jetbrains.spek.api.dsl.it
+import org.spekframework.spek2.Spek
+import org.spekframework.spek2.style.specification.describe
 import kotlin.test.assertEquals
 
 class GameRepositoryTest: Spek({
-    given("a game repository") {
+    describe("a game repository") {
         var gameRepository = InMemoryGameRepository()
 
         context("nextId") {

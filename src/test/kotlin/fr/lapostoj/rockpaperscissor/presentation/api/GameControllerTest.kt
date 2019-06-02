@@ -14,9 +14,8 @@ import fr.lapostoj.rockpaperscissor.factory.aPlayMoveCommand
 import io.mockk.every
 import io.mockk.mockk
 import io.mockk.verify
-import org.jetbrains.spek.api.Spek
-import org.jetbrains.spek.api.dsl.given
-import org.jetbrains.spek.api.dsl.it
+import org.spekframework.spek2.Spek
+import org.spekframework.spek2.style.specification.describe
 import org.springframework.http.MediaType
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post
@@ -24,7 +23,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers.*
 import org.springframework.test.web.servlet.setup.MockMvcBuilders.standaloneSetup
 
 class GameControllerTest: Spek({
-    given("a game controller") {
+    describe("a game controller") {
         val createGame = mockk<CreateGame>()
         val getGame = mockk<GetGame>()
         val playMove = mockk<PlayMove>()

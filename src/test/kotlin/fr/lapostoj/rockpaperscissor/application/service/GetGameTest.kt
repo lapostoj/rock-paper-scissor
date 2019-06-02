@@ -6,15 +6,13 @@ import fr.lapostoj.rockpaperscissor.factory.aGame
 import fr.lapostoj.rockpaperscissor.factory.aGameResponse
 import io.mockk.every
 import io.mockk.mockk
-import org.jetbrains.spek.api.Spek
-import org.jetbrains.spek.api.dsl.context
-import org.jetbrains.spek.api.dsl.given
-import org.jetbrains.spek.api.dsl.it
+import org.spekframework.spek2.Spek
+import org.spekframework.spek2.style.specification.describe
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
 
 class GetGameTest: Spek({
-    given("a get game service") {
+    describe("a get game service") {
         val gameRepository = mockk<GameRepository>()
         val service = GetGame(gameRepository)
 

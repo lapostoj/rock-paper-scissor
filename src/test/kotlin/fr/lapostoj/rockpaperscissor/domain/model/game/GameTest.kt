@@ -3,15 +3,13 @@ package fr.lapostoj.rockpaperscissor.domain.model.game
 import fr.lapostoj.rockpaperscissor.factory.aGame
 import fr.lapostoj.rockpaperscissor.factory.aGameWithNoRound
 import fr.lapostoj.rockpaperscissor.factory.aMove
-import org.jetbrains.spek.api.Spek
-import org.jetbrains.spek.api.dsl.context
-import org.jetbrains.spek.api.dsl.given
-import org.jetbrains.spek.api.dsl.it
+import org.spekframework.spek2.Spek
+import org.spekframework.spek2.style.specification.describe
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
 
 class GameTest: Spek({
-    given("a game with no round") {
+    describe("a game with no round") {
         val game = aGameWithNoRound()
 
         context("playMove") {
@@ -24,7 +22,7 @@ class GameTest: Spek({
         }
     }
 
-    given("a game with an incomplete round") {
+    describe("a game with an incomplete round") {
         val game = aGame()
         val move1 = aMove(game.playerIds[0], MoveValue.ROCK)
         game.playMove(move1)
@@ -42,7 +40,7 @@ class GameTest: Spek({
         }
     }
 
-    given("a game with a complete round") {
+    describe("a game with a complete round") {
         val game = aGame()
         val move1 = aMove(game.playerIds[0], MoveValue.ROCK)
         val move2 = aMove(game.playerIds[1], MoveValue.ROCK)
@@ -68,7 +66,7 @@ class GameTest: Spek({
         }
     }
 
-    given("an already finished game") {
+    describe("an already finished game") {
         val game = aGame(GameId(123), listOf(PlayerId(1), PlayerId(2)), 1)
         val move1 = aMove(game.playerIds[0], MoveValue.ROCK)
         val move2 = aMove(game.playerIds[1], MoveValue.PAPER)

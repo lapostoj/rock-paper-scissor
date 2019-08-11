@@ -1,9 +1,9 @@
 buildscript {
 	ext {
-		kotlinVersion = '1.3.31'
-		springBootVersion = '2.1.5.RELEASE'
-		junitPlatformVersion = '1.4.2'
-		speckVersion = '2.0.5'
+		kotlinVersion = '1.3.41'
+		springBootVersion = '2.1.7.RELEASE'
+		junitPlatformVersion = '1.5.1'
+		speckVersion = '2.0.6'
 		mockkVersion = '1.9.3'
 	}
 	repositories {
@@ -13,6 +13,7 @@ buildscript {
 		classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:${kotlinVersion}")
 		classpath("org.jetbrains.kotlin:kotlin-allopen:${kotlinVersion}")
         classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+		classpath("org.junit.platform:junit-platform-commons:${junitPlatformVersion}")
     }
 }
 
@@ -66,6 +67,7 @@ dependencies {
     testCompile("org.spekframework.spek2:spek-dsl-jvm:${speckVersion}")
 	testCompile("org.springframework.boot:spring-boot-starter-test")
 	testCompile("io.mockk:mockk:${mockkVersion}")
+	testCompile("org.junit.platform:junit-platform-commons:${junitPlatformVersion}")
 	testCompile("org.junit.platform:junit-platform-engine:${junitPlatformVersion}")
 	testRuntime("org.spekframework.spek2:spek-runner-junit5:${speckVersion}")
 }

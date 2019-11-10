@@ -9,11 +9,11 @@ import fr.lapostoj.rockpaperscissor.presentation.api.response.GameResponse
 import fr.lapostoj.rockpaperscissor.presentation.api.response.MoveResponse
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
-import org.springframework.http.MediaType
+import org.springframework.http.MediaType.APPLICATION_JSON_VALUE
 import org.springframework.web.bind.annotation.*
 
 @RestController
-@RequestMapping("/v1/games", consumes = [MediaType.APPLICATION_JSON_UTF8_VALUE], produces = [MediaType.APPLICATION_JSON_UTF8_VALUE])
+@RequestMapping("/v1/games", consumes = [APPLICATION_JSON_VALUE], produces = [APPLICATION_JSON_VALUE])
 class GameController {
     @Autowired
     lateinit var createGame: CreateGame

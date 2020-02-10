@@ -16,7 +16,8 @@ import io.mockk.mockk
 import io.mockk.verify
 import org.spekframework.spek2.Spek
 import org.spekframework.spek2.style.specification.describe
-import org.springframework.http.MediaType
+import org.springframework.http.MediaType.APPLICATION_JSON
+import org.springframework.http.MediaType.APPLICATION_JSON_VALUE
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.*
@@ -44,13 +45,13 @@ class GameControllerTest: Spek({
             val response = mvc.perform(
                 post("/v1/games")
                     .content(objectMapper.writeValueAsString(createGameCommand))
-                    .contentType(MediaType.APPLICATION_JSON_UTF8)
-                    .accept(MediaType.APPLICATION_JSON_UTF8)
+                    .contentType(APPLICATION_JSON)
+                    .accept(APPLICATION_JSON)
             )
 
             verify { createGame.forCommand(createGameCommand = any()) }
             response.andExpect(status().isCreated)
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+                .andExpect(content().contentType(APPLICATION_JSON_VALUE))
                 .andExpect(jsonPath("$.playerIds").isArray)
                 .andExpect(jsonPath("$.playerIds[0]").value(50))
                 .andExpect(jsonPath("$.playerIds[1]").value(51))
@@ -63,13 +64,13 @@ class GameControllerTest: Spek({
 
             val response = mvc.perform(
                 get("/v1/games/$id")
-                    .contentType(MediaType.APPLICATION_JSON_UTF8)
-                    .accept(MediaType.APPLICATION_JSON_UTF8)
+                    .contentType(APPLICATION_JSON)
+                    .accept(APPLICATION_JSON)
             )
 
             verify { getGame.forId(gameId = any()) }
             response.andExpect(status().isOk)
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+                .andExpect(content().contentType(APPLICATION_JSON_VALUE))
                 .andExpect(jsonPath("$.playerIds").isArray)
                 .andExpect(jsonPath("$.playerIds[0]").value(50))
                 .andExpect(jsonPath("$.playerIds[1]").value(51))
@@ -82,13 +83,13 @@ class GameControllerTest: Spek({
 
             val response = mvc.perform(
                 get("/v1/games/$id")
-                    .contentType(MediaType.APPLICATION_JSON_UTF8)
-                    .accept(MediaType.APPLICATION_JSON_UTF8)
+                    .contentType(APPLICATION_JSON)
+                    .accept(APPLICATION_JSON)
             )
 
             verify { getGame.forId(gameId = any()) }
             response.andExpect(status().isNotFound)
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+                .andExpect(content().contentType(APPLICATION_JSON_VALUE))
                 .andExpect(jsonPath("$").value("game.not.found"))
         }
 
@@ -100,13 +101,13 @@ class GameControllerTest: Spek({
             val response = mvc.perform(
                 post("/v1/games/$gameId/moves")
                     .content(objectMapper.writeValueAsString(playMoveCommand))
-                    .contentType(MediaType.APPLICATION_JSON_UTF8)
-                    .accept(MediaType.APPLICATION_JSON_UTF8)
+                    .contentType(APPLICATION_JSON)
+                    .accept(APPLICATION_JSON)
             )
 
             verify { playMove.forCommand(gameId = any(), playMoveCommand = any()) }
             response.andExpect(status().isCreated)
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+                .andExpect(content().contentType(APPLICATION_JSON_VALUE))
                 .andExpect(jsonPath("$.playerId").value(playMoveCommand.playerId))
                 .andExpect(jsonPath("$.moveValue").value(playMoveCommand.moveValue.name))
         }
@@ -119,13 +120,13 @@ class GameControllerTest: Spek({
             val response = mvc.perform(
                 post("/v1/games/$gameId/moves")
                     .content(objectMapper.writeValueAsString(playMoveCommand))
-                    .contentType(MediaType.APPLICATION_JSON_UTF8)
-                    .accept(MediaType.APPLICATION_JSON_UTF8)
+                    .contentType(APPLICATION_JSON)
+                    .accept(APPLICATION_JSON)
             )
 
             verify { playMove.forCommand(gameId = any(), playMoveCommand = any()) }
             response.andExpect(status().isNotFound)
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+                .andExpect(content().contentType(APPLICATION_JSON_VALUE))
                 .andExpect(jsonPath("$").value("game.not.found"))
         }
 
@@ -137,13 +138,13 @@ class GameControllerTest: Spek({
             val response = mvc.perform(
                 post("/v1/games/$gameId/moves")
                     .content(objectMapper.writeValueAsString(playMoveCommand))
-                    .contentType(MediaType.APPLICATION_JSON_UTF8)
-                    .accept(MediaType.APPLICATION_JSON_UTF8)
+                    .contentType(APPLICATION_JSON)
+                    .accept(APPLICATION_JSON)
             )
 
             verify { playMove.forCommand(gameId = any(), playMoveCommand = any()) }
             response.andExpect(status().isUnprocessableEntity)
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+                .andExpect(content().contentType(APPLICATION_JSON_VALUE))
                 .andExpect(jsonPath("$").value("invalid.move"))
         }
 
@@ -155,13 +156,13 @@ class GameControllerTest: Spek({
             val response = mvc.perform(
                 post("/v1/games/$gameId/moves")
                     .content(objectMapper.writeValueAsString(playMoveCommand))
-                    .contentType(MediaType.APPLICATION_JSON_UTF8)
-                    .accept(MediaType.APPLICATION_JSON_UTF8)
+                    .contentType(APPLICATION_JSON)
+                    .accept(APPLICATION_JSON)
             )
 
             verify { playMove.forCommand(gameId = any(), playMoveCommand = any()) }
             response.andExpect(status().isUnprocessableEntity)
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+                .andExpect(content().contentType(APPLICATION_JSON_VALUE))
                 .andExpect(jsonPath("$").value("game.finished"))
         }
     }

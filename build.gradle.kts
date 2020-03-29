@@ -1,8 +1,8 @@
 import org.jetbrains.kotlin.gradle.plugin.KotlinPluginWrapper
 
 val kotlinVersion = plugins.getPlugin(KotlinPluginWrapper::class.java).kotlinPluginVersion
-val junitPlatformVersion = "1.6.0"
-val spekVersion = "2.0.9"
+val junitPlatformVersion = "1.6.1"
+val spekVersion = "2.0.10"
 val mockkVersion = "1.9.3"
 
 group = "fr.lapostoj"
@@ -10,9 +10,9 @@ version = "0.0.1-SNAPSHOT"
 
 plugins {
 	idea
-	kotlin("jvm") version "1.3.61"
-	kotlin("plugin.spring") version "1.3.61"
-	id("org.springframework.boot") version "2.2.4.RELEASE"
+	kotlin("jvm") version "1.3.70"
+	kotlin("plugin.spring") version "1.3.70"
+	id("org.springframework.boot") version "2.2.6.RELEASE"
 	id("io.spring.dependency-management") version "1.0.9.RELEASE"
 }
 

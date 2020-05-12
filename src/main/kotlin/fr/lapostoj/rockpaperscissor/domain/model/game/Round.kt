@@ -12,15 +12,19 @@ class Round(
     }
 
     fun getWinner(): PlayerId? {
-        if (moves.size < 2){
-            return null
-        }
-        if (moves[0] > moves[1]) {
-            return moves[0].playerId
-        } else if (moves[0] < moves[1]) {
-            return moves[1].playerId
-        } else {
-            return null
+        return when {
+            moves.size < 2 -> {
+                return null
+            }
+            moves[0] > moves[1] -> {
+                moves[0].playerId
+            }
+            moves[0] < moves[1] -> {
+                moves[1].playerId
+            }
+            else -> {
+                null
+            }
         }
     }
 

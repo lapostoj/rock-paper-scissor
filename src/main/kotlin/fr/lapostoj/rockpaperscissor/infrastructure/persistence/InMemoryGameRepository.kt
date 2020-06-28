@@ -4,7 +4,7 @@ import fr.lapostoj.rockpaperscissor.domain.model.game.Game
 import fr.lapostoj.rockpaperscissor.domain.model.game.GameId
 import fr.lapostoj.rockpaperscissor.domain.model.game.GameRepository
 
-class InMemoryGameRepository: GameRepository {
+class InMemoryGameRepository : GameRepository {
     private val inMemoryStorage: MutableMap<Long, Game> = hashMapOf()
     private var idSequence = 1.toLong()
 

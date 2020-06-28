@@ -5,7 +5,7 @@ import org.spekframework.spek2.Spek
 import org.spekframework.spek2.style.specification.describe
 import kotlin.test.assertEquals
 
-class MoveToMoveResponseTest: Spek({
+class MoveToMoveResponseTest : Spek({
     describe("a move") {
         val move = aMove()
         it("should convert correctly to move response") {

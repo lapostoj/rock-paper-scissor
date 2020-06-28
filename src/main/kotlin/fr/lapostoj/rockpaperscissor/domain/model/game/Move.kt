@@ -3,7 +3,8 @@ package fr.lapostoj.rockpaperscissor.domain.model.game
 data class Move(
     val playerId: PlayerId,
     val value: MoveValue
-): Comparable<Move> {
+) : Comparable<Move> {
+
     override fun compareTo(other: Move): Int {
         if (value == MoveValue.ROCK) {
             if (other.value == MoveValue.ROCK) {

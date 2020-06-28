@@ -7,7 +7,7 @@ import fr.lapostoj.rockpaperscissor.presentation.api.command.PlayMoveCommand
 fun aCreateGameCommand(
     playerIds: List<Long> = listOf(50, 51),
     winningScore: Int = 5
-) = CreateGameCommand (
+) = CreateGameCommand(
     playerIds = playerIds,
     winningScore = winningScore
 )

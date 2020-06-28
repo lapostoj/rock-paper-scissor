@@ -4,9 +4,13 @@ import fr.lapostoj.rockpaperscissor.factory.aMove
 import fr.lapostoj.rockpaperscissor.factory.aRound
 import org.spekframework.spek2.Spek
 import org.spekframework.spek2.style.specification.describe
-import kotlin.test.*
+import kotlin.test.assertEquals
+import kotlin.test.assertFailsWith
+import kotlin.test.assertNotNull
+import kotlin.test.assertNull
+import kotlin.test.assertTrue
 
-class RoundTest: Spek({
+class RoundTest : Spek({
     describe("a round") {
         var round = aRound()
 

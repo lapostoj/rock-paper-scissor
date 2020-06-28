@@ -6,7 +6,7 @@ import org.spekframework.spek2.Spek
 import org.spekframework.spek2.style.specification.describe
 import kotlin.test.assertEquals
 
-class GameToGameResponseTest: Spek({
+class GameToGameResponseTest : Spek({
     describe("a game") {
         val game = aGame()
         it("should convert correctly to game response") {

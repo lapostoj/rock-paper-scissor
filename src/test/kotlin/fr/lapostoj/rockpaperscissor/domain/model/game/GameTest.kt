@@ -8,7 +8,7 @@ import org.spekframework.spek2.style.specification.describe
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
 
-class GameTest: Spek({
+class GameTest : Spek({
     describe("a game with no round") {
         val game = aGameWithNoRound()
 

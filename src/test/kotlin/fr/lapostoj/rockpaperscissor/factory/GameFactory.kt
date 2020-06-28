@@ -1,7 +1,13 @@
 package fr.lapostoj.rockpaperscissor.factory
 
-import fr.lapostoj.rockpaperscissor.domain.model.game.*
-import java.util.*
+import fr.lapostoj.rockpaperscissor.domain.model.game.Game
+import fr.lapostoj.rockpaperscissor.domain.model.game.GameId
+import fr.lapostoj.rockpaperscissor.domain.model.game.Move
+import fr.lapostoj.rockpaperscissor.domain.model.game.MoveValue
+import fr.lapostoj.rockpaperscissor.domain.model.game.PlayerId
+import fr.lapostoj.rockpaperscissor.domain.model.game.Round
+import fr.lapostoj.rockpaperscissor.domain.model.game.RoundId
+import java.util.UUID
 
 fun aGame(
     id: GameId = GameId(123),

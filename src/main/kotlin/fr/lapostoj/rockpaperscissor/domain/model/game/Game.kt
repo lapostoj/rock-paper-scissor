@@ -14,18 +14,18 @@ class Game(
     }
 
     private fun validateGameIsNotFinished() {
-        playerIds.forEach{
-            playerId -> (
-                if (winningScore == getScore(playerId)) {
-                    throw GameFinishedException("Player $playerId already won the game")
-                }
-            )
+        playerIds.forEach {
+            playerId ->
+            if (winningScore == getScore(playerId)) {
+                throw GameFinishedException("Player $playerId already won the game")
+            }
         }
     }
 
     private fun getScore(playerId: PlayerId): Int {
-        return rounds.filter{
-            round -> playerId == round.getWinner()
+        return rounds.filter {
+            round ->
+            playerId == round.getWinner()
         }.size
     }
 
@@ -43,4 +43,3 @@ class Game(
         rounds.add(Round(RoundId.nextId(), id, rounds.size + 1, mutableListOf()))
     }
 }
-

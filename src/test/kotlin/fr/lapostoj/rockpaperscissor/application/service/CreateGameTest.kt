@@ -13,7 +13,7 @@ import org.spekframework.spek2.Spek
 import org.spekframework.spek2.style.specification.describe
 import kotlin.test.assertEquals
 
-class CreateGameTest: Spek({
+class CreateGameTest : Spek({
     describe("a create game service") {
         val gameRepository = mockk<GameRepository>()
         every { gameRepository.nextId() } returns GameId(123)

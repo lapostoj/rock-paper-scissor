@@ -6,7 +6,7 @@ import org.spekframework.spek2.style.specification.describe
 import kotlin.test.assertEquals
 import kotlin.test.assertTrue
 
-class MoveTest: Spek({
+class MoveTest : Spek({
     describe("a rock move") {
         val move = aMove()
 

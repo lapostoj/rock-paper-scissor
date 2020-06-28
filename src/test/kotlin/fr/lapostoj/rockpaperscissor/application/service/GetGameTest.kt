@@ -11,7 +11,7 @@ import org.spekframework.spek2.style.specification.describe
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
 
-class GetGameTest: Spek({
+class GetGameTest : Spek({
     describe("a get game service") {
         val gameRepository = mockk<GameRepository>()
         val service = GetGame(gameRepository)

@@ -14,7 +14,7 @@ import org.spekframework.spek2.style.specification.describe
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
 
-class PlayMoveTest: Spek({
+class PlayMoveTest : Spek({
     describe("a play move service") {
         val gameRepository = mockk<GameRepository>()
         every { gameRepository.findById(id = any()) } returns aGame()

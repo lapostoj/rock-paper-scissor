@@ -4,4 +4,3 @@ data class CreateGameCommand(
     val playerIds: List<Long>,
     val winningScore: Int
 )
-

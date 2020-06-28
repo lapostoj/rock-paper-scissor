@@ -1,7 +1,7 @@
 import org.jetbrains.kotlin.gradle.plugin.KotlinPluginWrapper
 
 val kotlinVersion = plugins.getPlugin(KotlinPluginWrapper::class.java).kotlinPluginVersion
-val spekVersion = "2.0.10"
+val spekVersion = "2.0.11"
 val mockkVersion = "1.10.0"
 val ktlintVersion = "0.37.2"
 
@@ -12,7 +12,7 @@ plugins {
     idea
     kotlin("jvm") version "1.3.72"
     kotlin("plugin.spring") version "1.3.72"
-    id("org.springframework.boot") version "2.2.7.RELEASE"
+    id("org.springframework.boot") version "2.3.1.RELEASE"
     id("io.spring.dependency-management") version "1.0.9.RELEASE"
     id("com.diffplug.gradle.spotless") version "4.4.0"
 }

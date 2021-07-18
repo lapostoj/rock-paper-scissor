@@ -2,19 +2,19 @@ import org.jetbrains.kotlin.gradle.plugin.KotlinPluginWrapper
 
 val kotlinVersion = plugins.getPlugin(KotlinPluginWrapper::class.java).kotlinPluginVersion
 val spekVersion = "2.0.15"
-val mockkVersion = "1.11.0"
+val mockkVersion = "1.12.0"
 val ktlintVersion = "0.41.0"
 
 group = "fr.lapostoj"
-version = "0.0.1"
+version = "1.0.0"
 
 plugins {
     idea
-    kotlin("jvm") version "1.5.10"
-    kotlin("plugin.spring") version "1.5.10"
-    id("org.springframework.boot") version "2.5.1"
+    kotlin("jvm") version "1.5.21"
+    kotlin("plugin.spring") version "1.5.21"
+    id("org.springframework.boot") version "2.5.2"
     id("io.spring.dependency-management") version "1.0.11.RELEASE"
-    id("com.diffplug.spotless") version "5.14.0"
+    id("com.diffplug.spotless") version "5.14.1"
 }
 
 idea.project {

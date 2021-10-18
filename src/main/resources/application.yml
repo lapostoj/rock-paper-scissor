@@ -1,6 +1,8 @@
-server:
-  port: 8080
-
 spring:
+  main:
+    banner-mode: off
   application:
     name: rock-paper-scissor
+
+server:
+  port: 8080
